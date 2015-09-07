@@ -82,7 +82,23 @@ angular.module('app')
          });
          return deferred.promise;
 
+      },
+
+      session: function(){
+
+         var deferred = $q.defer();
+         RESTful.get('users/session')
+         .then(function(response){
+            deferred.resolve(response);
+         },function(err){
+            console.log(err);
+            deferred.reject(err);
+         });
+         return deferred.promise;
+
       }
+
+
 
     };
   });

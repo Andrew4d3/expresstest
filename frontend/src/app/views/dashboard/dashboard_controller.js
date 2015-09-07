@@ -32,10 +32,9 @@ angular.module('app')
    var loadUsers = function(){
       usersService.list()
       .then(function(users){
-         console.log(users);
          $scope.all_users = users;
       });
-   }
+   };
 
    loadUsers();
 
@@ -57,18 +56,19 @@ angular.module('app')
       console.log(payload);
       usersService.update(payload)
       .then(function(response){
-         console.log(response);
          toastr.success("El usuario se ha actualizado exitosamente","Todo Bien");
       },function(err){
-         console.log(user);
-         console.log(err);
+         if(err.message=="Validation error" && err.fields.email){
+            toastr.error("Este correo electronico ya esta asignado a otro usuario","Error");
+            user.email = user.email_old;
+         }
+
       });
    };
 
    $scope.keep_old = function(user,key){
 
       user[key+'_old'] = user[key];
-      console.log(user);
       return true;
    };
 

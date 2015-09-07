@@ -1,5 +1,5 @@
 angular.module('app')
-  .run(function($rootScope, $log, PageService,editableOptions) {
+  .run(function($rootScope, $log, $location, PageService,editableOptions,usersService) {
      editableOptions.theme = 'bs3';
     // Broadcasted before a route change. At this point the route services starts
     // resolving all of the dependencies needed for the route change to occur.
@@ -7,6 +7,19 @@ angular.module('app')
     // in resolve route property. Once all of the dependencies are resolved $routeChangeSuccess
     // is fired.
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+      /*usersService.session()
+      .then(function(response){
+
+         if(response.session && (toState.data.restrict_access=="only_nouser")){
+            $location.path("/dashboard");
+         }
+         else if(!response.session && (toState.data.restrict_access=="only_user")){
+            $location.path("/login");
+         }
+         PageService.get();
+      });
+*/
+
       // TODO: check if the current route requires Auth and the user is logged in
       // TODO: create a global array for routes that require Auth
     });
@@ -15,8 +28,20 @@ angular.module('app')
     // Broadcasted after a route dependencies are resolved. ngView listens
     // for the directive to instantiate the controller and render the view.
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+
+      usersService.session()
+      .then(function(response){
+
+         if(response.session && (toState.data.restrict_access=="only_nouser")){
+            $location.path("/dashboard");
+         }
+         else if(!response.session && (toState.data.restrict_access=="only_user")){
+            $location.path("/login");
+         }
+         PageService.get();
+      });
       // Setting page properties
-      PageService.get();
+
     });
 
 
