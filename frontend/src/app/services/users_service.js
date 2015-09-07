@@ -56,6 +56,20 @@ angular.module('app')
 
       },
 
+      update: function(payload){
+
+         var deferred = $q.defer();
+         RESTful.put('users',payload)
+         .then(function(response){
+            deferred.resolve(response);
+         },function(err){
+            console.log(err);
+            deferred.reject(err);
+         });
+         return deferred.promise;
+
+      },
+
       delete: function(id){
 
          var deferred = $q.defer();

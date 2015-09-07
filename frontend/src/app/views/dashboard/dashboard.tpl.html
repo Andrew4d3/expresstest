@@ -39,14 +39,12 @@
       <tbody>
         <tr ng-repeat="user in all_users">
           <th scope="row">{{user.id}}</th>
-          <td ><a href="" editable-text="user.name" >{{user.name}}</a></td>
-          <td><a href="" editable-text="user.last_name" >{{user.last_name}}</a></td>
-          <td><a href="" editable-text="user.email" >{{user.email}}</a></td>
-          <td><a href="" editable-select="user.holding_id" e-ng-options="s.id as s.name for s in holdings" >{{showName(user.holding_id,holdings)}}</a></td>
-          <td><a href="" editable-select="user.profile_id" e-ng-options="p.id as p.name for p in profiles" >{{showName(user.profile_id,profiles)}}</a></td>
+          <td ><a href="" editable-text="user.name" onaftersave="update(user,'name')" >{{user.name}}</a></td>
+          <td><a href="" editable-text="user.last_name" onaftersave="update(user,'last_name')"  >{{user.last_name}}</a></td>
+          <td><a href="" editable-text="user.email" onaftersave="update(user,'email')" onbeforesave="keep_old(user,'email')"  >{{user.email}}</a></td>
+          <td><a href="" editable-select="user.holding_id" e-ng-options="s.id as s.name for s in holdings" onaftersave="update(user,'holding_id')"  >{{showName(user.holding_id,holdings)}}</a></td>
+          <td><a href="" editable-select="user.profile_id" e-ng-options="p.id as p.name for p in profiles" onaftersave="update(user,'profile_id')"  >{{showName(user.profile_id,profiles)}}</a></td>
           <td>
-             <a href=""><i class="fa fa-pencil"></i></a>
-             &nbsp;&nbsp;&nbsp;
              <a ng-click="delete(user.id);"  href=""><i  class="fa fa-trash-o"></i></a>
           </td>
         </tr>

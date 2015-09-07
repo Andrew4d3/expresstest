@@ -1,9 +1,10 @@
 angular.module('app')
-.controller('DashboardController', function($scope,$location,$filter,usersService,SweetAlert,valuesService) {
+.controller('DashboardController', function($scope,$location,$filter,usersService,SweetAlert,valuesService,toastr) {
 
    $scope.all_users = [];
    $scope.holdings = [];
    $scope.profiles = [];
+
 
    valuesService.holdings()
    .then(function(holdings){
@@ -44,6 +45,34 @@ angular.module('app')
          $location.path("/");
       });
    };
+
+   $scope.update = function(user,key){
+
+      var payload = {
+         id: user.id,
+         attributes:{}
+      };
+
+      payload.attributes[key] = user[key];
+      console.log(payload);
+      usersService.update(payload)
+      .then(function(response){
+         console.log(response);
+         toastr.success("El usuario se ha actualizado exitosamente","Todo Bien");
+      },function(err){
+         console.log(user);
+         console.log(err);
+      });
+   };
+
+   $scope.keep_old = function(user,key){
+
+      user[key+'_old'] = user[key];
+      console.log(user);
+      return true;
+   };
+
+
 
    $scope.delete = function(id){
 
