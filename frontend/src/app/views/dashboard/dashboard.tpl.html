@@ -1,0 +1,60 @@
+<div class="container-fluid">
+
+   <nav class="navbar navbar-default">
+      <div class="container-fluid">
+         <!-- Brand and toggle get grouped for better mobile display -->
+         <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Dashboard</a>
+         </div>
+
+         <!-- Collect the nav links, forms, and other content for toggling -->
+         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav navbar-right">
+               <li><a href="" ng-click="logout();">Cerrar Sesion</a></li>
+
+            </ul>
+         </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+   </nav>
+
+   <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Correo Electronico</th>
+          <th>Holding</th>
+          <th>Perfil</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in all_users">
+          <th scope="row">{{user.id}}</th>
+          <td ><a href="" editable-text="user.name" >{{user.name}}</a></td>
+          <td><a href="" editable-text="user.last_name" >{{user.last_name}}</a></td>
+          <td><a href="" editable-text="user.email" >{{user.email}}</a></td>
+          <td><a href="" editable-select="user.holding_id" e-ng-options="s.id as s.name for s in holdings" >{{showName(user.holding_id,holdings)}}</a></td>
+          <td><a href="" editable-select="user.profile_id" e-ng-options="p.id as p.name for p in profiles" >{{showName(user.profile_id,profiles)}}</a></td>
+          <td>
+             <a href=""><i class="fa fa-pencil"></i></a>
+             &nbsp;&nbsp;&nbsp;
+             <a ng-click="delete(user.id);"  href=""><i  class="fa fa-trash-o"></i></a>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+
+
+
+</div>

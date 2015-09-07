@@ -1,0 +1,79 @@
+<div id="loginRegisterContainer" class="container" login-register-container >
+    	<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-login">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-6">
+								<a href="#" class="active" id="login-form-link">Iniciar de Sesión</a>
+							</div>
+							<div class="col-xs-6">
+								<a href="#" id="register-form-link">Registrarse</a>
+							</div>
+						</div>
+						<hr>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<form ng-submit="login()" id="login-form"  role="form" style="display: block;">
+									<div class="form-group">
+										<input ng-model="credentials.email" type="email"  tabindex="1" class="form-control" placeholder="Correo Electronico" required>
+									</div>
+									<div class="form-group">
+										<input ng-model="credentials.password" type="password"  tabindex="2" class="form-control" placeholder="Contraseña" required>
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" tabindex="4" class="form-control btn btn-login" value="Entrar">
+											</div>
+										</div>
+									</div>
+
+								</form>
+								<form id="register-form" ng-submit="create_user()" role="form" style="display: none;">
+									<div class="form-group">
+										<input ng-model="register.email" type="text"  tabindex="1" class="form-control" placeholder="Correo Electronico" required>
+									</div>
+									<div class="form-group">
+										<input ng-model="register.name" type="text"  tabindex="1" class="form-control" placeholder="Nombre"  required>
+									</div>
+                           <div class="form-group">
+										<input ng-model="register.last_name" type="text"  tabindex="1" class="form-control" placeholder="Apellido" required>
+									</div>
+                           <div class="form-group">
+                              <label>Perfil</label>
+                              <select ng-model="register.profile_id" class="form-control"  required>
+                                 <option ng-repeat="profile in profiles" ng-value="profile.id">{{profile.name}}</option>
+                              </select>
+									</div>
+                           <div class="form-group">
+                              <label>Holding</label>
+                              <select ng-model="register.holding_id" class="form-control"  required>
+                                 <option ng-repeat="holding in holdings" ng-value="holding.id">{{holding.name}}</option>
+                              </select>
+
+									</div>
+									<div class="form-group">
+										<input ng-model="register.password" type="password" tabindex="2" class="form-control" placeholder="Contraseña" required>
+									</div>
+									<div class="form-group">
+										<input ng-model="register.repassword" type="password" tabindex="2" class="form-control" placeholder="Repita Contraseña" required>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit"  tabindex="4" class="form-control btn btn-register" value="Enviar">
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
